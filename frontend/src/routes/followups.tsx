@@ -117,9 +117,9 @@ function FollowUps() {
       </div>
 
       <div className="grid lg:grid-cols-3 gap-4">
-        <Section title="Today" count={todays.length} tone="warning" items={todays} setAllFollowups={setAllFollowups} handleDelete={handleDelete} />
-        <Section title="Upcoming (7 days)" count={upcoming.length} tone="info" items={upcoming} setAllFollowups={setAllFollowups} handleDelete={handleDelete} />
-        <Section title="Completed" count={completed.length} tone="success" items={completed} done setAllFollowups={setAllFollowups} handleDelete={handleDelete} />
+        <Section title="Today" count={todays.length} tone="warning" items={todays} setAllFollowups={setAllFollowups} />
+        <Section title="Upcoming (7 days)" count={upcoming.length} tone="info" items={upcoming} setAllFollowups={setAllFollowups} />
+        <Section title="Completed" count={completed.length} tone="success" items={completed} done setAllFollowups={setAllFollowups} />
       </div>
 
       {isScheduleOpen && (
@@ -177,7 +177,7 @@ function FollowUps() {
   );
 }
 
-function Section({ title, count, tone, items, done, setAllFollowups, handleDelete }: { title: string; count: number; tone: string; items: any[]; done?: boolean; setAllFollowups: any; handleDelete: (id: string) => void }) {
+function Section({ title, count, tone, items, done, setAllFollowups }: { title: string; count: number; tone: string; items: any[]; done?: boolean; setAllFollowups: any }) {
   const toneMap: Record<string, string> = {
     warning: "bg-warning/15 text-warning",
     info: "bg-info/10 text-info",
