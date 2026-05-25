@@ -1,15 +1,14 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
-  Outlet, createRootRouteWithContext, useRouter, useRouterState,
-  HeadContent, Scripts,
+  Outlet, createRootRouteWithContext, useRouter, useRouterState
 } from "@tanstack/react-router";
 import { useEffect } from "react";
 
-import appCss from "../styles.css?url";
+import "../styles.css";
 import { Sidebar } from "@/components/Sidebar";
 import { Topbar } from "@/components/Topbar";
 import { Toaster } from "@/components/ui/sonner";
-import { AuthProvider, useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/context/AuthContext";
 
 function NotFoundComponent() {
   return (
@@ -41,31 +40,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "ForgeCRM — Manufacturing Sales Workflow" },
-      { name: "description", content: "Modern CRM and BDA workflow management for manufacturing sales teams — leads, pipeline, follow-ups, analytics." },
-    ],
-    links: [{ rel: "stylesheet", href: appCss }],
-  }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
-
-function RootShell({ children }: { children: React.ReactNode }) {
-  return (
-    <AuthProvider>
-      <html lang="en">
-        <head><HeadContent /></head>
-        <body>{children}<Scripts /></body>
-      </html>
-    </AuthProvider>
-  );
-}
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
